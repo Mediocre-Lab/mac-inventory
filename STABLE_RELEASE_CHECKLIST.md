@@ -1,0 +1,31 @@
+# Stable release acceptance
+
+The downloadable v0.1.0-beta.1 remains a prerelease. This checklist defines the evidence needed before the next release is presented as stable; editing documentation or removing a beta suffix does not satisfy it. No new runtime behavior has been shipped by this checklist.
+
+| Gate | Concrete acceptance evidence | Current status / required resource |
+| --- | --- | --- |
+| Independent assessment | A completed independent, scoped report tied to the candidate source commit; actionable findings resolved or explicitly accepted with stated impact; relevant regression evidence | Incomplete. The coordinator is separately checking the permitted review route. This checklist does not authorize retrying a denied assessment through a different agent/tool. |
+| Runtime self-containment | App launches and scanner/helper work on a clean supported Mac without Xcode, Command Line Tools, Homebrew or an externally installed Python | Not met. Current beta starts developer-tools `/usr/bin/python3`. |
+| Runtime provenance | Pinned reviewed redistributable runtime build/source, verified checksum, required stdlib/extensions/libraries and all applicable notices; no dependency on the build Mac's private paths | Not implemented. A private relocatable CPython bundle is the smallest proposed change that preserves the existing helpers; do not copy Apple's developer-tools launcher/framework as the redistribution source. |
+| Supported system matrix | Install/launch/scan/refresh/cancel/export/reopen on every advertised minimum OS and architecture; otherwise narrow advertised support to measured systems | Only macOS 27.0 arm64 is tested. Current binary declares macOS 13; earlier OS and Intel support are unverified. Clean disposable test systems are needed. |
+| Native app permissions | Use disposable user-selected fixture data and ordinary macOS consent behavior in relevant protected locations. Document allowed/denied paths, responsive UI, retained results and no privilege escalation. Check native-app context, not only shell access | POSIX-denial tests and confined GUI save-error recovery passed. Native-app TCC coverage remains unverified. Do not change settings or prescribe Full Disk Access without a demonstrated requirement and user approval. |
+| Representative real inventory | Complete a scoped real-disk refresh, review inaccessible/excluded paths, confirm cancel/retry/persistence and identify false installation claims. Preserve exports privately | Full real-disk pass not completed. Never claim comprehensive inventory of inaccessible/unmounted/remote/container software. |
+| Removal regressions | On disposable fixtures, verify exact preview/confirmation, ownership revalidation, protected/shared refusal, cancellation, no silent fallback and interrupted-removal recovery; live managers only against dedicated disposable environments | Existing fixture/mocked suite and approved GUI removals pass. Repeat relevant tests on the final bundled runtime and candidate binary. No real personal software deletion required. |
+| Final candidate QA | Run the scanner/removal/Swift lifecycle/permission suites together on the candidate commit, then normal GUI flows on the packaged candidate. Record pass/fail/skip counts and toolchain | 81 release tests passed; three additional permission tests passed separately. This is not a fresh combined 84-test candidate run. |
+| Signing and Gatekeeper | Verify actual downloaded/quarantined app using normal macOS protections. Prefer authorized Developer ID signing and notarization, including nested runtime components | No valid signing identity available. Beta is ad-hoc signed and not notarized. Credentials/account access are needed for the signed route; no credentials will be generated/purchased automatically. If unsigned distribution is intentionally retained, document that decision and actual supported installation behavior before stable acceptance. |
+| Source and artifact hygiene | Clean intended-source tree, separate user-owned MIT and third-party notices, no credentials/inventories/private logs/caches. Freeze source tag and bundle SemVer/numeric metadata consistently | Beta publication verified. Recheck after runtime or packaging changes. |
+| Final artifact verification | Build from frozen candidate, mount DMG read-only, verify expected contents/signatures/architecture/runtime dependencies, publish checksum and download back the exact bytes | Beta passed. Must repeat for a new candidate; never replace existing beta bytes silently. |
+| Release claims | README, install/uninstall guidance, changelog and release notes describe actual support, requirements and remaining risks; stable label appears only after gate review | Current beta stays labeled prerelease. Internal service-error wording can be removed while the unfinished independent-review and compatibility facts stay visible. |
+
+## Work that can proceed now
+
+- Prepare and review a private-runtime packaging design with a pinned provenance/license manifest, executable-path selection, isolated startup and missing-runtime diagnostics. No unreviewed runtime download or release is needed for that design.
+- Extend only meaningful disposable regression cases when new behavior or a demonstrated bug warrants them; preserve existing release bytes and ordinary OS protections.
+- Keep documentation synchronized with observed evidence. See [QA_COVERAGE.md](QA_COVERAGE.md) for the completed POSIX and GUI checks and [test_permissions.py](test_permissions.py) for reproducible fixtures.
+
+## Candidate sequence
+
+1. Resolve the independent-review route and obtain the required runtime/test-system/signing resources or document an intentionally narrower supported distribution.
+2. Implement and review the runtime/packaging change on source main or a development branch; test helpers against that exact interpreter. Resolve demonstrated issues before freezing the candidate.
+3. Run the acceptance matrix against one immutable candidate source revision and its packaged app, recording any remaining exclusions explicitly.
+4. Update truthful support/review claims, choose the appropriate next SemVer, and produce a separately versioned release only after the criteria are satisfied. Do not repoint the beta tag or overwrite its DMG.
