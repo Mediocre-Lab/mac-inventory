@@ -4,7 +4,7 @@ A native macOS software inventory viewer with metadata scanning, search, filters
 
 **Experimental prerelease: v0.1.0-beta.1.** Independent security assessment is incomplete. Use disposable data for evaluating removal features.
 
-[Download the DMG and checksum](https://github.com/Mediocre-Lab/mac-inventory/releases/tag/v0.1.0-beta.1) · [Installation](INSTALL.md) · [Removal behavior](UNINSTALL.md) · [QA coverage](QA_COVERAGE.md)
+[Download the DMG and checksum](https://github.com/Mediocre-Lab/mac-inventory/releases/tag/v0.1.0-beta.1) · [Installation](INSTALL.md) · [Removal behavior](UNINSTALL.md) · [QA coverage](QA_COVERAGE.md) · [Stable release criteria](STABLE_RELEASE_CHECKLIST.md)
 
 The arm64 download was tested on Apple silicon with macOS 27.0. The deployment target is macOS 13; earlier OS versions and Intel are unverified. A working Apple developer-tools `/usr/bin/python3` is required and is not bundled. The app is ad-hoc signed, has no Developer ID signature, and is not notarized. See INSTALL.md for requirements and Gatekeeper notes.
 
@@ -45,7 +45,7 @@ This is presence/metadata inventory, not proof software works. Records can repre
 
 The automatic snapshot lives at `~/Library/Application Support/Mac Inventory/inventory-current.json`. Exports and snapshots contain software lists and local paths; do not publish them unreviewed. No personal inventories or raw QA logs are included in this repository.
 
-An independent security workflow was blocked by the review platform before completion. Passing fixture tests and source review do not establish a complete security audit. Manual removal is not transactional against hostile same-user/privileged mount or filesystem changes; partially deleted data cannot be rolled back. Package manager and environment startup hooks remain trusted code boundaries.
+Independent security assessment has not been completed. Passing fixture tests and source review do not establish a complete security audit. Manual removal is not transactional against hostile same-user/privileged mount or filesystem changes; partially deleted data cannot be rolled back. Package manager and environment startup hooks remain trusted code boundaries.
 
 ## License
 
