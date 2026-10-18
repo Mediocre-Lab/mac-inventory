@@ -4,7 +4,7 @@ A native macOS software inventory viewer with metadata scanning, search, filters
 
 **Experimental prerelease: v0.1.0-beta.1.** Independent security assessment is incomplete. Use disposable data for evaluating removal features.
 
-[Download the DMG and checksum](https://github.com/Mediocre-Lab/mac-inventory/releases/tag/v0.1.0-beta.1) · [Installation](INSTALL.md) · [Removal behavior](UNINSTALL.md)
+[Download the DMG and checksum](https://github.com/Mediocre-Lab/mac-inventory/releases/tag/v0.1.0-beta.1) · [Installation](INSTALL.md) · [Removal behavior](UNINSTALL.md) · [QA coverage](QA_COVERAGE.md)
 
 The arm64 download was tested on Apple silicon with macOS 27.0. The deployment target is macOS 13; earlier OS versions and Intel are unverified. A working Apple developer-tools `/usr/bin/python3` is required and is not bundled. The app is ad-hoc signed, has no Developer ID signature, and is not notarized. See INSTALL.md for requirements and Gatekeeper notes.
 
@@ -26,6 +26,8 @@ sh build.sh
 /usr/bin/python3 -I -B test_scan.py
 /usr/bin/python3 -I -B test_uninstall.py
 /usr/bin/python3 -I -B test_snapshot.py
+# Additional post-release checks on main:
+/usr/bin/python3 -I -B test_permissions.py
 sh release.sh
 ```
 
@@ -34,6 +36,8 @@ The app is written to `.build/Mac Inventory.app`. `release.sh` builds it again, 
 VERSION uses Semantic Versioning; prereleases retain a beta suffix. Bundle marketing/build versions use Apple's numeric format; MacInventoryReleaseVersion records the complete SemVer. Update VERSION and numeric bundle fields together for subsequent releases and tag the source `v<VERSION>`.
 
 For controlled repeat builds use the same source tag, arm64 target, Xcode/Swift/macOS SDK and Python versions. Build flags, staging contents and ad-hoc signing mode are fixed in the scripts. DMG filesystem metadata and host toolchains can change bytes, so cross-machine bit-for-bit reproducibility is not promised. Verify each distributed artifact against its published SHA-256. See RELEASE_NOTES.md for the tested toolchain and evidence.
+
+Post-release permission QA adds three passing POSIX-denial tests and a confined GUI permission-error/recovery check. See [QA_COVERAGE.md](QA_COVERAGE.md) for exact evidence, remaining gaps and the proposed self-contained Python runtime. The published beta and its 81-test release record are unchanged. `SOURCE_SHA256.json` binds the original tagged release files; subsequent documentation and tests on main are outside that immutable manifest.
 
 ## Known limitations and privacy
 
