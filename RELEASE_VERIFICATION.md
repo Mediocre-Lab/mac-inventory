@@ -6,4 +6,4 @@
 - DMG internal checksum verification passed. Read-only mount succeeded; app bundle, source helper equality and arm64 executable verified. The image contains only app, LICENSE, INSTALL.md and an Applications link.
 - SHA256SUMS validates the DMG. It binds the downloadable bytes; rebuilding may produce a different DMG due to filesystem/toolchain metadata.
 - Public-source allowlist and app/image contents reviewed. No personal inventory, raw QA artifacts, private account/path data, credential files, caches or signing secrets included. No vendored third-party assets or libraries.
-- GUI evidence belongs to the earlier QA build; no clean-machine GUI check of this versioned bundle was performed. Platform-blocked independent security assessment, full real-disk coverage, protected-folder coverage and other systems/architectures remain unverified.
+- GUI evidence belongs to the earlier QA build; no clean-machine GUI check of this versioned bundle was performed. Independent security assessment, full real-disk coverage, protected-folder coverage and other systems/architectures remain unverified.
