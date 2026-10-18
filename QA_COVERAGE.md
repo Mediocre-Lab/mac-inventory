@@ -37,7 +37,7 @@ A previous bounded, read-only check opened Desktop, Documents, Downloads, Trash,
 
 | Remaining item | What is required to finish | Current limit |
 | --- | --- | --- |
-| Independent security assessment | A platform-approved review route that can complete the previously blocked assessment | Prior review generation was stopped by a platform filter; it was not retried or bypassed. Fixture QA does not replace it. |
+| Independent security assessment | A completed independent review tied to the release candidate | Incomplete. Fixture QA does not replace independent assessment. |
 | Native-app protected-folder coverage | User-selected disposable fixtures in relevant protected locations, ordinary macOS permission behavior and a bounded native-app scan | Shell access and POSIX-denial fixtures do not prove TCC access. No Full Disk Access or other grant was requested. |
 | Complete real-disk scan | A user-approved scan scope/time and review of Coverage for mounted volumes and inaccessible paths | A full real-disk pass was not completed; no exhaustiveness claim. |
 | Clean-machine runtime/install validation | A disposable clean macOS environment without developer tools, plus normal Gatekeeper handling | Current beta requires developer-tools Python, is ad-hoc signed and is not notarized. |
@@ -45,7 +45,7 @@ A previous bounded, read-only check opened Desktop, Documents, Downloads, Trash,
 | Developer ID signing/notarization | Existing authorized signing identity, Apple account and notarization access | No valid signing identity was available. No credentials were created or purchased and no protections bypassed. |
 | Self-contained runtime | A reviewed pinned redistributable Python runtime, complete license/dependency review, bundle wiring and clean-machine tests | Proposal below only; no runtime downloaded or new release published. |
 
-Additional local repetitions of the same fixtures cannot close these environment, access or review-route gaps. No further denied scan retries or security-setting changes are planned.
+Additional local repetitions of the same fixtures cannot close these environment, access or independent-review gaps. See [stable release acceptance](STABLE_RELEASE_CHECKLIST.md) for measurable candidate gates.
 
 ## Developer-tools Python distribution limitation
 
